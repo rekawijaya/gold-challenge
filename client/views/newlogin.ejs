@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <!-- <link rel="stylesheet" href="../assets/css/regist.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet">
+<link href="/css/loginregist.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- <img src="../assets/img/mountain-6783202_1920.png" alt=""> -->
+        </div>
+        <div class="contains">
+            <div class="caption">
+                <h1>lets treasure around the world</h1>
+                <h2>go to some where with me</h2>
+            </div>
+            <div class="login">
+                <h1>login</h1>
+                <div class="prompt">
+                    <div class="input">
+                    <input type="text" placeholder="username" autocomplete="username" id="username">
+                    <input type="password" placeholder="password" id="password">
+                        <div class="button">
+                        <button class="primary-button" type="button" onclick="myLogin()">login</button>
+                        <button class="secondary-button" type="button" onclick="toRegister()">register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        async function toRegister(){
+            window.location.href = '/user/register'
+        }
+        async function myLogin(){
+            console.log("register")
+            let username = document.getElementById("username").value
+            let password = document.getElementById("password").value
+            axios.get('http://localhost:8082/submit_login?username='+username+'&password=' + password).then(function (response) {
+            console.log("response", response)
+            if(response.data.status == 'Success'){
+                window.location.href = "<%= base_url%>"
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'opps...',
+                    text: response.data.display_message, 
+                })
+            }
+        })
+        }
+    </script>
+</body>
+</html>

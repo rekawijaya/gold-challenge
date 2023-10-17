@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <!-- <link rel="stylesheet" href="../assets/css/regist.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet">
+<link href="/css/loginregist.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- <img src="../assets/img/mountain-6783202_1920.png" alt=""> -->
+        </div>
+        <div class="contains">
+            <div class="caption">
+                <h1>lets treasure around the world</h1>
+                <h2>go to some where with me</h2>
+            </div>
+            <div class="login">
+                <h1>registrasi</h1>
+                <div class="prompt">
+                    <div class="input">
+                    <input type="text" placeholder="username" autocomplete="username" id="username">
+                    <input type="password" placeholder="password" id="password">
+                    <input type="text" placeholder="email" autocomplete="email" id="email">
+                        <div class="button">
+                        <button class="primary-button" type="button" onclick="myRegist()">subbmit</button>
+                        <button class="secondary-button" type="button" onclick="toLogin()">login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        async function toLogin(){
+            window.location.href = '/login'
+        }
+        async function myRegist(){
+            console.log("register")
+            let username = document.getElementById("username").value
+            let password = document.getElementById("password").value
+            let email = document.getElementById("email").value
+            axios.get('http://localhost:8082/user/submit_register?username='+username+'&password=' + password+'&email=' + email).then(function (response) {
+                console.log("response", response)
+                if(response.data.status == 'Success'){
+                    window.location.href = "<%= base_url %>"
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'opps...',
+                        text: response.data.display_message, 
+                    })
+            }
+        })
+        }
+    </script>
+</body>
+</html>

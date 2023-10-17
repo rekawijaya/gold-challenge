@@ -1,0 +1,129 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: poppins;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://images.unsplash.com/photo-1592763235816-d816aed4f981?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80);
+  background-size: cover;
+  background-position-y: -5rem;
+  background-repeat: no-repeat;
+}
+
+.container .logo {
+  /* background: #000; */
+  margin-top: -45rem;
+  margin-left: 3rem;
+}
+
+.logo img {
+  width: 150px;
+}
+
+.container .contains {
+  /* background-color: #fff; */
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contains .caption {
+  /* background-color: bisque; */
+  width: 40%;
+  height: 50vh;
+  margin: 10rem 4rem;
+}
+
+.caption h1 {
+  font-size: 3rem;
+  color: rgb(107, 69, 161);
+  text-transform: uppercase;
+}
+
+.caption h2 {
+  font-size: 2.5rem;
+  color: rgb(107, 69, 161);
+}
+
+.contains .login {
+  background-color: rgba(255, 255, 255, 0.404);
+  width: 40%;
+  height: 50vh;
+  margin: 10rem 4rem;
+  border-radius: 10px;
+}
+
+.login h1 {
+  font-size: 1.5;
+  color: rgb(107, 69, 161);
+  text-transform: capitalize;
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.login .prompt {
+  /* background: #000; */
+  width: 100%;
+  height: 40vh;
+  display: flex;
+}
+
+.login .prompt .input {
+  /* background-color: #fff; */
+  margin: 0rem 3.3rem;
+}
+
+.login .prompt .input input {
+  /* background-color: aquamarine; */
+  display: block;
+  padding: 10px 15px;
+  margin: 2rem;
+  width: 150%;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.prompt .secondary-button {
+  margin-left: 2rem;
+  padding: 5px 19px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  background-color: rgb(107, 69, 161);
+  border: 3px solid rgb(187, 138, 255);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background-color: rgb(143, 35, 243);
+}
+
+.prompt .primary-button {
+  margin-left: 2rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  background-color: rgb(107, 69, 161);
+  border: 3px solid rgb(187, 138, 255);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+.primary-button:hover {
+  background-color: rgb(143, 35, 243);
+}

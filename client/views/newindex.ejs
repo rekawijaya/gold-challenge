@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+    <!-- <link rel="stylesheet" href="index.css"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <section id="home" class="home">
+        <div class="headers">
+            <div class="logo">
+                <h1>logo</h1>
+            </div>
+        </div>
+        <div class="container">
+            <!-- profile left -->
+            <div class="profile">
+                <div class="pitcprofile">
+                    <a href="#"><img src="/images/username.webp" alt="png"></a>
+                    <h2><%=username%></h2>
+                </div>
+                <div class="userfitur">
+                <div class="fituricon">
+                    <a href="#"><i data-feather="home"></i></a>
+                    <div class="text">
+                        <a href="#">home</a>
+                    </div>
+                </div>
+                </div>
+                <div class="userfitur">
+                <div class="fituricon">
+                    <a href="#"><i data-feather="bell"></i></a>
+                    <div class="text">
+                        <a href="#">notification</a>
+                    </div>
+                </div>
+                </div>
+                <div class="userfitur">
+                <div class="fituricon">
+                    <a href="#"><i data-feather="user"></i></a>
+                    <div class="text">
+                        <a href="#">profile</a>
+                    </div>
+                </div>
+                </div>
+                <div class="userfitur">
+                <div class="fituricon">
+                    <a href="#"><i data-feather="settings"></i></a>
+                    <div class="text">
+                        <a href="#">settings</a>
+                    </div>
+                </div>
+                </div>
+                <div class="userfitur">
+                <div class="fituricon">
+                    <a href="#"><i data-feather="power"></i></a>
+                    <div class="text">
+                        <a href="<%= base_url%>/logoff">log out</a>
+                    </div>
+                </div>
+                </div>
+                <div class="userfitur">
+                <div class="fituricon">
+                    <div class="textpost">
+                        <a href="#">+ New Post</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- posting page -->
+            <div class="page">
+                <div class="imgpage">
+                    <img src="https://images.unsplash.com/photo-1683525767818-5dad2b25ddf0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2162&q=80" alt="mountain">
+                </div>
+                <div class="postpage">
+                    <div class="postinput">
+                        <div class="input">
+                            <input type="text" id="caption" placeholder="whats your plane">
+                            <div class="iconpost">
+                                <label for="upload" class="label"><i data-feather="image"></i></label>
+                                <input type="file" id="upload">
+                                <label for="video" class="label"><i data-feather="video"></i></label>
+                                <input type="file" id="video">
+                                <label for="#" class="label"><i data-feather="map-pin"></i></label>
+                                <input type="text" id="map">
+                                <label for="#" class="label"><i data-feather="clock"></i></label>
+                                <input type="text" id="time">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button type="button" onclick="myUpload()">post</button>
+                    </div>
+                </div>
+                <div class="feedpage">
+                    <div class="imgprofile">
+                        <a href="#"><img src="https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTM5LnBuZw.png" alt="png"></a>
+                        <h2><%=username%></h2>
+                        <div class="icon">
+                            <a href="#"><i data-feather="more-vertical"></i></a>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="img">
+                            <img src="https://images.unsplash.com/photo-1682695798522-6e208131916d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="posting">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search">
+                <div class="searchinput">
+                    <a href="#"><i data-feather="search"></i></a>
+                    <input type="text" placeholder="search">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        feather.replace();
+      </script>
+      <script>
+       async function myUpload() {
+  console.log("upload");
+  let caption = document.getElementById("caption").value;
+  let file = document.getElementById("upload");
+  let selectedFile = file.files[0]
+
+  if (selectedFile) {
+    console.log(selectedFile);
+    console.log("Nama file:", selectedFile.name)
+    console.log("Tipe file:", selectedFile.type)
+    console.log("Ukuran file:", selectedFile.size, "bytes")
+
+    let formData = new FormData()
+    formData.append("caption", caption)
+    formData.append("foto", selectedFile)
+  }
+}
+    </script>
+</body>
+</html>
