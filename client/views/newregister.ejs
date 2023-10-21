@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet">
-<link href="/css/loginregist.css" rel="stylesheet">
+<link href="/css/regist.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -21,14 +21,26 @@
                 <h2>go to some where with me</h2>
             </div>
             <div class="login">
-                <h1>registrasi</h1>
+                <h1>registration</h1>
                 <div class="prompt">
                     <div class="input">
                     <input type="text" placeholder="username" autocomplete="username" id="username">
                     <input type="password" placeholder="password" id="password">
-                    <input type="text" placeholder="email" autocomplete="email" id="email">
+                    <input type="email" placeholder="email" autocomplete="email" id="email">
+                    <input type="text" placeholder="name"  id="name">
+                    <input type="text" placeholder="city" id="city">
+                    <input type="date" placeholder="birthday" id="bday">
+                    <div class="gender">
+                        <h3>Gender</h3>
+                        <div class="inputgender">
+                        <input type="radio" id="gender" name="gender" value="male"">
+                        <label for="gender">male</label>
+                        <input type="radio" id="gender" name="gender" value="female"">
+                        <label for="gender">female</label>
+                    </div>
+                    </div>
                         <div class="button">
-                        <button class="primary-button" type="button" onclick="myRegist()">subbmit</button>
+                        <button class="primary-button" type="button" onclick="myRegist()">submit</button>
                         <button class="secondary-button" type="button" onclick="toLogin()">login</button>
                         </div>
                     </div>
@@ -47,7 +59,11 @@
             let username = document.getElementById("username").value
             let password = document.getElementById("password").value
             let email = document.getElementById("email").value
-            axios.get('http://localhost:8082/user/submit_register?username='+username+'&password=' + password+'&email=' + email).then(function (response) {
+            let name = document.getElementById("name").value
+            let city = document.getElementById("city").value
+            let bday = document.getElementById("bday").value
+            let gender = document.getElementById("gender").value
+            axios.get('http://localhost:8082/user/submit_register?username='+username+'&password='+password+'&email='+email+'&name='+ name+'&city='+city+'&bday='+bday+'&gender='+gender).then(function (response) {
                 console.log("response", response)
                 if(response.data.status == 'Success'){
                     window.location.href = "<%= base_url %>"

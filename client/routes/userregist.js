@@ -33,7 +33,14 @@ router.get('/register', async (req, res) => {
 })
 
 router.get('/submit_register', async (req, res) =>{
-    let data = JSON.stringify({"username": req.query.username, "password": req.query.password, "email": req.query.email})
+    let data = JSON.stringify({"username": req.query.username, 
+    "password": req.query.password, 
+    "email": req.query.email,
+    "name": req.query.name,
+    "city": req.query.city,
+    "bday": req.query.bday,
+    "gender": req.query.gender
+})
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -57,7 +64,7 @@ router.get('/submit_register', async (req, res) =>{
     }else{
         res.setHeader("Content-Type", "application/json")
         res.writeHead(200);
-        res.end(JSON.stringify({status: "Failed", display_message: "registrasi gagal 2", data: ""}))
+        res.end(JSON.stringify({status: "Failed", display_message: "registrasi gagal, username mximal 15 character dan password 8 character", data: ""}))
     }
 })
 module.exports = router

@@ -1,7 +1,7 @@
-var multiparty      = require('multiparty')
-var randomstring    = require('randomstring')
-var path            = require('path')
-var fs              = require('fs')
+const multiparty      = require('multiparty')
+const randomstring    = require('randomstring')
+const path            = require('path')
+const fs              = require('fs')
 let self = module.exports = {
     get: async function(req, res) {
             let foto = (typeof req.params.foto != 'undefined' && req.params.foto != '')? req.params.foto.trim(): ""
@@ -9,14 +9,15 @@ let self = module.exports = {
             res.writeHead(200, {'Content-disposition': 'attachment; filename='+ req.params.foto})
             foto.pipe(res)
     },
+    // upload posting
     upload: function(req, res) {
-        let form = new multiparty.Form();
+        let form = new multiparty.Form()
         form.parse(req, function(err, fields, files) {
             console.log("fields", fields)
             console.log("files", files);
             let ext = path.extname(files.foto[0].originalFilename);
             if(ext === '.jpeg' || ext === '.png' || ext === '.gif' || ext === '.jpg'){
-                let caption    = (typeof fields.caption != 'undefined')? fields.caption[0]: ''
+                let caption     = (typeof fields.caption != 'undefined')? fields.caption[0]: ''
                 let randstr     = randomstring.generate(7)
                 let reader_temp = fs.createReadStream(files.foto[0].path);
                 let dest        = path.join('C:/Users/wijay/OneDrive/Desktop/gold-challenge/client/assets/images/', randstr + ext)
