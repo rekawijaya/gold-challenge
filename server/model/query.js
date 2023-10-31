@@ -1,3 +1,4 @@
+require('dotenv').config({path: '../env/.env'})
 const knex = require('knex')({
     client: 'pg',
     version: '14.9',
@@ -5,60 +6,46 @@ const knex = require('knex')({
     host : '127.0.0.1',
     port : 5432,
     user : 'postgres',
-    password : 'rekawijaya',
-    database : 'sosmed'
+    password : process.env.POSTGRES_PASSWORD,
+    database : 'wanderly'
     }
 });
 let self = module.exports = {
-    select: function(table, where) {
-        return knex.select('*').from(table).where(where)
-            .then((data) => {
-                return data
-            }).catch((error) => {
-                console.error("Gagal mengambil data dari tabel:", error)
-                throw error
-            })
+    select: async function select(table, where) {
+        try {
+            const data = await knex.select('*').from(table).where(where)
+            return data
+        } catch (error) {
+            console.error("Gagal mengambil data dari tabel:", error);
+            throw error
+        }
     },
-    insert: function ( table, data) {
-        return new Promise(function (resolve, reject) {
-            knex(table)
-                .insert(data)
-                .then((post) => {
-                    resolve(post)
-                })
-                .catch((error) => {
-                    console.error("Gagal menyisipkan data ke dalam tabel:", error)
-                    reject(error)
-                })
-        })
+    insert: async function insert(table, data) {
+        try {
+            const post = await knex(table).insert(data)
+            return post
+        } catch (error) {
+            console.error("Gagal menyisipkan data ke dalam tabel:", error);
+            throw error
+        }
     },
-    update: function (table, data, where) {
-        return new Promise(function (resolve, reject) {
-            knex(table)
-                .update(data).where(where)
-                .then((post) => {
-                    resolve(post)
-                })
-                .catch((error) => {
-                    console.error("Gagal menyisipkan data ke dalam tabel:", error)
-                    reject(error)
-                })
-        })
+
+    update: async function update(table, data, where) {
+        try {
+            const post = await knex(table).update(data).where(where)
+            return post
+        } catch (error) {
+            console.error("Gagal mengupdate data dalam tabel:", error);
+            throw error
+        }
     },
-    delete: function (table, criteria) {
-        return new Promise(function (resolve, reject) {
-            knex(table)
-                .where(criteria)
-                .del() 
-                .then((deletedCount) => {
-                    resolve(deletedCount)
-                })
-                .catch((error) => {
-                    console.error("Gagal menghapus data dari tabel:", error)
-                    reject(error)
-                })
-        })
-    }
-    
-    
+    delete:async function remove(table, criteria) {
+        try {
+        const deletedCount = await knex(table).where(criteria).del()
+            return deletedCount
+        } catch (error) {
+        console.error("Gagal menghapus data dari tabel:", error);
+            throw error
+        }
+    } 
 }

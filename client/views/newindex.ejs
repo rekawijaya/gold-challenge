@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>homepage</title>
+    <title>Wanderly</title>
     <!-- <link rel="stylesheet" href="index.css"> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
     <section id="home" class="home">
         <div class="headers">
             <div class="logo">
-                <h1>logo</h1>
+                <h1>WANDERLY</h1>
             </div>
         </div>
         <div class="container">
@@ -81,15 +81,15 @@
                 <div class="postpage">
                     <div class="postinput">
                         <div class="input">
-                            <input type="text" id="caption" placeholder="whats your plane">
+                            <input type="text" id="caption" placeholder="Create new journey . . .">
                             <div class="iconpost">
                                 <label for="upload" class="label"><i data-feather="image"></i></label>
                                 <input type="file" id="upload">
                                 <label for="video" class="label"><i data-feather="video"></i></label>
                                 <input type="file" id="video">
-                                <label for="#" class="label"><i data-feather="map-pin"></i></label>
-                                <input type="text" id="map">
-                                <label for="#" class="label"><i data-feather="clock"></i></label>
+                                <label for="location" class="label"><i data-feather="map-pin"></i></label>
+                                <input type="text" id="location">
+                                <label for="time" class="label"><i data-feather="clock"></i></label>
                                 <input type="text" id="time">
                             </div>
                         </div>
@@ -127,23 +127,26 @@
         feather.replace();
       </script>
       <script>
-       async function myUpload() {
-  console.log("upload");
-  let caption = document.getElementById("caption").value;
-  let file = document.getElementById("upload");
-  let selectedFile = file.files[0]
+        async function myUpload(){
+            console.log("upload")
+            let caption = document.getElementById("caption").value
+            let upload = document.getElementById("upload").value
+            let location = document.getElementById("location").value
+            axios.post('http://localhost:8082/posting/submit_upload?caption='+caption+'&dest='+upload+'&location='+location).then(function (response) {
+                console.log(upload);
+                console.log("response", response)
+                if(response.data.status == 'Success'){
+                    console.log('mantep');
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'opps...',
+                        text: response.data.display_message, 
+                    })
+            }
+        })
+    }
 
-  if (selectedFile) {
-    console.log(selectedFile);
-    console.log("Nama file:", selectedFile.name)
-    console.log("Tipe file:", selectedFile.type)
-    console.log("Ukuran file:", selectedFile.size, "bytes")
-
-    let formData = new FormData()
-    formData.append("caption", caption)
-    formData.append("foto", selectedFile)
-  }
-}
     </script>
 </body>
 </html>
