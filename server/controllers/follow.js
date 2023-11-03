@@ -17,5 +17,18 @@ let self = module.exports = {
         }else{
             respons.ERROR(res, {status: 'filed', message: 'user tidak ditemukan', data: []})
         }
+    },
+
+    deleteFollow: async function (req, res){
+        const id            = req.params.id
+        const id_follower   = req.params.id_follower
+        const criteria      = {id_user_following: id, id_user_follower: id_follower}
+        const getFollow     = await query.select('follow', criteria)
+        if (getFollow.length > 0) {
+            await query.delete('follow', criteria)
+            respons.OK(res, {statsu: 'success', message: 'follow berhasil dihapus', data: getFollow})
+        }else {
+            respons.NOTFOUND(res, {status: 'failed', message: 'follow tidak ditemukan'})
+        }
     }
 }

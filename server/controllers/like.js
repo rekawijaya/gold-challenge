@@ -14,5 +14,17 @@ let self = module.exports = {
         } else {
             respons.NOTFOUND(res, { status: 'filed', message: 'posting tidak ditemukan', data: [] })
         }
+    },
+    likeDelete: async function (req, res) {
+        const id_user    = req.params.id_user
+        const id         = req.params.id
+        const criteria   = {id_user: id_user, id_posting: id}
+        const getLike    = await query.delete('like', criteria)
+        if (getLike.length > 0) {
+            await query.delete('like', criteria)
+            respons.OK(res, {statsu: 'success', message: 'like berhasil dihapus'})
+        }else {
+            respons.NOTFOUND(res, {status: 'filed', message: 'like tidak ditemukan'})
+        }
     }
 }
