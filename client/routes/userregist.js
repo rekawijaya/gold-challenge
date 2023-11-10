@@ -2,7 +2,7 @@ const express       = require('express')
 const router        = express.Router()
 const path          = require("path")
 const fs            = require("fs")
-require('dotenv').config()
+require('dotenv').config({path: '../env/.env'})
 //var assets          = path.join(__dirname, 'assets')
 const axios         = require('axios')
 const session       = require('express-session')
@@ -56,15 +56,15 @@ router.get('/submit_register', async (req, res) =>{
     }).catch((error) => {
         return {"status":"Failed","message":"registrasi gagal","data":[]}
     });
-    if(hasil.status == "Success"){
+    if(hasil.status == "success"){
         req.session.username = req.query.username;
         res.setHeader("Content-Type", "application/json")
         res.writeHead(200);
-        res.end(JSON.stringify({status: "Success", display_message: "registrasi success", data: ""}))
+        res.end(JSON.stringify({status: "success", display_message: "registrasi success", data: ""}))
     }else{
         res.setHeader("Content-Type", "application/json")
         res.writeHead(200);
-        res.end(JSON.stringify({status: "Failed", display_message: "registrasi gagal, username mximal 15 character dan password 8 character", data: ""}))
+        res.end(JSON.stringify({status: "Failed", display_message: "registrasi gagal, username mximal 15 character dan password 8 character wawawaw", data: ""}))
     }
 })
 module.exports = router

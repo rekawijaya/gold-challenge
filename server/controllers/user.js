@@ -1,11 +1,22 @@
+
+
 let self = module.exports = {
     // login
+    getUser: async function (req, res){
+        const id = req.params.id
+        const getDataUser = await query.select('user', {id: id})
+        if(getDataUser.length === 0){
+            respons.OK(res, {status: 'failed', message: 'data tidak ada'})
+        }else {
+            respons.OK(res, {status: 'success', message: 'data berhasil diselect', data: getDataUser})
+        }
+    },
     login: async function(req, res) {
         const { username, password } = req.body
         
         if (!username || !password) {
-            respons(res, { status: 'Failed', message: 'Username dan password harus diisi', data: [] })
-            return;
+            respons.ERROR(res, { status: 'Failed', message: 'Username dan password harus diisi', data: [] })
+            return
         }
     
         const getUser = await query.select('user', { username })
@@ -17,7 +28,7 @@ let self = module.exports = {
                 respons.NOTFOUND(res, { status: 'Failed', message: 'Password tidak sesuai', data: [] })
             }
         } else {
-            respons.ERRORs(res, { status: 'Failed', message: 'Login gagal', data: [] })
+            respons.ERROR(res, { status: 'Failed', message: 'Login gagal', data: [] })
         }
     },
     
@@ -28,8 +39,8 @@ let self = module.exports = {
         
         if (!username || !password || !email || !name || !city || !bday || !gender) {
             respons.ERROR(res, { status: 'Gagal', message: 'Ada field yang belum diisi', data: [] })
-        } else if (username.length >= 15 || password.length >= 8 || name.length >= 35) {
-            respons.ERROR(res, { status: 'Gagal', message: 'Maksimum karakter username 15, password 8, nama 35', data: [] })
+        } else if (username.length > 25 || password.length > 25 || name.length > 35) {
+            respons.ERROR(res, { status: 'Gagal', message: 'Maksimum karakter username 15, password 16, nama 35', data: [] })
         } else {
             const getUser = await query.select('user', { username })
             if (getUser.length > 0) {

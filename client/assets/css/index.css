@@ -1,0 +1,101 @@
+@media (max-width: 570px) {
+  .container-fluid {
+    position: unset !important;
+  }
+  .col-lg-2 {
+    position: unset !important;
+    margin-top: -0rem !important;
+  }
+  .col-lg-8 {
+    margin-left: -0rem !important;
+    position: unset !important;
+  }
+  .col-lg-8 img {
+    display: none;
+  }
+  .col-lg-8 .container {
+    height: 65vh !important;
+    margin-top: -4rem !important;
+  }
+
+  .container-lg .img-fluid {
+    display: block !important;
+  }
+
+  .col-md-2 {
+    position: unset !important;
+    display: none !important;
+  }
+  #container1 {
+    height: max-content !important;
+    padding-top: 4.5rem !important;
+  }
+  .container-lg .container-fluid img {
+    display: block;
+  }
+  .container-lg .container-fluid h4 {
+    font-size: smaller !important;
+  }
+  #container0 {
+    /* background: #000 !important; */
+    height: max-content !important;
+    margin-top: 0.5rem !important;
+  }
+}
+.container-lg .container-fluid i {
+  width: 20px !important;
+}
+.container h3 {
+  height: max-content;
+  font-size: 10px !important;
+}
+
+@media (max-width: 780px) {
+  .container-fluid {
+    position: unset !important;
+  }
+  .col-lg-2 {
+    position: unset !important;
+    margin-top: -0rem !important;
+  }
+  .col-lg-8 {
+    margin-left: -0rem !important;
+    position: unset !important;
+  }
+  .col-lg-8 img {
+    display: none;
+  }
+  .col-lg-8 .container {
+    height: 65vh !important;
+    margin-top: -4rem !important;
+  }
+
+  .container-lg .img-fluid {
+    display: block !important;
+  }
+
+  .col-md-2 {
+    position: unset !important;
+    display: none !important;
+  }
+  #container1 {
+    height: max-content !important;
+    padding-top: 4.5rem !important;
+  }
+  #container0 {
+    /* background: #000 !important; */
+    height: max-content !important;
+    margin-top: 0.5rem !important;
+    margin-left: -0.2rem;
+  }
+  .container-lg .container-fluid img {
+    display: block;
+  }
+  .container-lg .container-fluid h4 {
+    font-size: 15px !important;
+  }
+  .container h3 {
+    height: max-content;
+    font-size: 15px !important;
+  }
+}

@@ -9,6 +9,8 @@ const posting = require('./routes/postingroutes')
 const coments = require('./routes/comentsroutes')
 const like = require('./routes/likeroutes')
 const follow = require('./routes/followroutes')
+const profile = require('./routes/profileroutes')
+const post    = require('./routes/postroutes')
 
 app.use(cors())
 app.use(express.json()) // for parsing application/json
@@ -19,6 +21,8 @@ app.use(posting)
 app.use(coments)
 app.use(like)
 app.use(follow)
+app.use(profile)
+app.use(post)
 
 app.listen(port, () => {
   console.log(`pinjem dulu ${port} mah ada x`)

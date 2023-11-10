@@ -4,123 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wanderly</title>
-    <!-- <link rel="stylesheet" href="index.css"> -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet">
-<link href="/css/style.css" rel="stylesheet">
-<script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
-<body>
-    <section id="home" class="home">
-        <div class="headers">
-            <div class="logo">
-                <h1>WANDERLY</h1>
-            </div>
-        </div>
-        <div class="container">
-            <!-- profile left -->
-            <div class="profile">
-                <div class="pitcprofile">
-                    <a href="#"><img src="/images/username.webp" alt="png"></a>
-                    <h2><%=username%></h2>
+<body style="background: #121010a5; height: 2000vh;">
+    <div class="container-fluid" style="height: 5rem; background: rgb(107, 69, 161); display: flex; justify-content: center; align-items: center; position: fixed; z-index: 9999;">
+        <h1 style="font-size: xx-large; color: #fff; font-weight: 900;">WANDERLY</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- menu barr -->
+            <div class="col-lg-2" style="height: 100vh; background-color: #fff; margin-top: 5rem; position: fixed; z-index: 99;">
+                <input type="file" id="file" style="position: absolute; margin-top: 1rem; width: 185px; height: 185px; cursor: pointer; opacity: 0;; border-radius: 120%; margin-left: 1rem;">
+                <div class="container" style="background-color: rgb(107, 69, 161); display: flex; justify-content: center; align-items: center; width: 185px; height: 185px; border-radius: 100%; margin-top: 1rem;">
+                    <img style="width: 180px; border-radius: 100%; " src="/images/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="profile">
                 </div>
-                <div class="userfitur">
-                <div class="fituricon">
-                    <a href="#"><i data-feather="home"></i></a>
-                    <div class="text">
-                        <a href="#">home</a>
+                <div class="container">
+                    <h1 style="font-size: x-large; text-align: center; padding-top: 10px;"><%=username%></h1>
+                </div>
+                <div class="container" style=" height: 55vh;">
+                    <div class="container" style="margin-top: 2rem; display: flex; align-items: center">
+                        <i style="width: 25px; height: 33px; stroke: #5e5e5e; stroke-width:2;" data-feather="user"></i>
+                            <name style=" color:#3b3838; font-weight: 700; font-size: medium; text-transform: capitalize; margin-left: 10px; padding-top: 0.5rem;"><%=username%></h5>
                     </div>
-                </div>
-                </div>
-                <div class="userfitur">
-                <div class="fituricon">
-                    <a href="#"><i data-feather="bell"></i></a>
-                    <div class="text">
-                        <a href="#">notification</a>
+                    <div class="container" style="margin-top: 2rem; display: flex; align-items: center;">
+                        <i style="width: 25px; height: 33px; stroke: #5e5e5e; stroke-width:2;" data-feather="mail"></i>
+                            <h5 style=" color:#3b3838; font-weight: 700; font-size: medium; text-transform: capitalize; margin-left: 10px; padding-top: 0.5rem;"><%=data.name%></h5>
                     </div>
-                </div>
-                </div>
-                <div class="userfitur">
-                <div class="fituricon">
-                    <a href="#"><i data-feather="user"></i></a>
-                    <div class="text">
-                        <a href="#">profile</a>
+                    <div class="container" style="margin-top: 2rem; display: flex; align-items: center">
+                        <a href="#"><i style="width: 25px; height: 33px; stroke: #5e5e5e; stroke-width:2;" data-feather="map-pin"></i></a>
+                            <h5 style=" color:#3b3838; font-weight: 700; font-size: medium; text-transform: capitalize; margin-left: 10px; padding-top: 0.5rem;">address</h5>
                     </div>
-                </div>
-                </div>
-                <div class="userfitur">
-                <div class="fituricon">
-                    <a href="#"><i data-feather="settings"></i></a>
-                    <div class="text">
-                        <a href="#">settings</a>
+                    <div class="container" style="margin-top: 2rem; display: flex; align-items: center">
+                        <a href="#"><i style="width: 25px; height: 33px; stroke: #5e5e5e; stroke-width:2;" data-feather="calendar"></i></a>
+                            <h5 style=" color:#3b3838; font-weight: 700; font-size: medium; text-transform: capitalize; margin-left: 10px; padding-top: 0.5rem;">birthday</h5>
                     </div>
-                </div>
-                </div>
-                <div class="userfitur">
-                <div class="fituricon">
-                    <a href="#"><i data-feather="power"></i></a>
-                    <div class="text">
-                        <a href="<%= base_url%>/logoff">log out</a>
+                    <div class="container" style="margin-top: 2rem; display: flex; align-items: center">
+                        <i style="width: 25px; height: 33px; stroke: #5e5e5e; stroke-width:2;" data-feather="users"></i>
+                            <h5 style=" color:#3b3838; font-weight: 700; font-size: medium; text-transform: capitalize; margin-left: 10px; padding-top: 0.5rem;">gender</h5>
                     </div>
-                </div>
-                </div>
-                <div class="userfitur">
-                <div class="fituricon">
-                    <div class="textpost">
-                        <a href="#">+ New Post</a>
+                    <div class="container" style="margin-top: 2rem; display: flex; align-items: center">
+                        <a href="#"><i style="width: 25px; height: 33px; stroke: #5e5e5e; stroke-width:2;" data-feather="power"></i></a>
+                            <a style="text-decoration: none; color:#3b3838; font-weight: 700; font-size: medium; text-transform: capitalize; margin-left: 10px" href="#">logout</a>
                     </div>
-                </div>
+                    <div class="container" style="margin-top: 2rem; display: flex; align-items: center">
+                        <button type="button" style="width: 20vh; color: #fff; font-size: larger; font-weight: 700; background-color: rgb(107, 69, 161);" class="btn">+ New Post</button>
+                    </div>
                 </div>
             </div>
             <!-- posting page -->
-            <div class="page">
-                <div class="imgpage">
-                    <img src="https://images.unsplash.com/photo-1683525767818-5dad2b25ddf0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2162&q=80" alt="mountain">
+            <div class="col-lg-8" style="height: 100vh; background: #686464a5; margin-left: 15rem; margin-top: 5rem;">
+            <img style="width: 100%; height: 35vh; border-radius: 5px; margin-top: 0.2rem" src="/images/alessio-zappatore-GrPKdyDf1gQ-unsplash.jpg" alt="">
+            <div class="container" id="formposting" style="height: 60vh; background-color: #fff; margin-top: 2rem; border-radius: 10px;">
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Description</label>
+                    <textarea class="form-control" id="Description" rows="3"></textarea>
                 </div>
-                <div class="postpage">
-                    <div class="postinput">
-                        <div class="input">
-                            <input type="text" id="caption" placeholder="Create new journey . . .">
-                            <div class="iconpost">
-                                <label for="upload" class="label"><i data-feather="image"></i></label>
-                                <input type="file" id="upload">
-                                <label for="video" class="label"><i data-feather="video"></i></label>
-                                <input type="file" id="video">
-                                <label for="location" class="label"><i data-feather="map-pin"></i></label>
-                                <input type="text" id="location">
-                                <label for="time" class="label"><i data-feather="clock"></i></label>
-                                <input type="text" id="time">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="button">
-                        <button type="button" onclick="myUpload()">post</button>
-                    </div>
+                <div class="mb-3">
+                    <label for="file" class="form-label">Foto/Video</label>
+                    <input class="form-control" type="file" id="file">
                 </div>
-                <div class="feedpage">
-                    <div class="imgprofile">
-                        <a href="#"><img src="https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTM5LnBuZw.png" alt="png"></a>
-                        <h2><%=username%></h2>
-                        <div class="icon">
-                            <a href="#"><i data-feather="more-vertical"></i></a>
-                        </div>
+                <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input class="form-control" type="text" id="location">
+            </div>
+                <label style="margin-bottom:10px;" for="budget">Budget</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Rp.</span>
+                    <span class="input-group-text">0.00</span>
+                    <input type="text" class="form-control" id="budget" aria-label="Dollar amount (with dot and two decimal places)">
                     </div>
-                    <div class="container">
-                        <div class="img">
-                            <img src="https://images.unsplash.com/photo-1682695798522-6e208131916d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="posting">
-                        </div>
+                    <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input class="form-control" type="date" id="date">
                     </div>
+            </div>
+            <div class="container-lg" style="width: 100%; height:max-content; background: #ffffffc8; margin-top: 1rem; border-radius: 10px;">
+                <div class="container-fluid" style="display: flex; align-items: center; justify-content:space-between;">
+                    <div class="container" id="container0" style=" height: 120px;">
+                    <img style="width: 70px; border-radius: 100%;" src="/images/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="">
+                    <h1 style="padding-left: 1rem; padding-top:1rem; font-size: x-large; margin-left: -2rem; margin-top: -1rem;">username</h1>
+                    </div>
+                    <a href="#"><i style="width: 35px; height: 33px; stroke: #5e5e5e; stroke-width:2; margin-top: 1rem;" data-feather="heart"></i></a>
+                </div>
+                <img class="img-fluid" style="width: 100%; padding-top: 0.5rem;" src="/images/photo-1682687221080-5cb261c645cb.avif" alt="">
+                <div class="container-fluid" style="background-color: #fff; height: fit-content; border-radius: 0px 0px 5px 5px;">
+                    <h4 style="padding-bottom: 1rem; font-weight: 400; font-size: large; padding-top: 1rem;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi quas repudiandae repellat facilis nesciunt dicta iure ab, molestiae officiis. In hic quia eveniet quas placeat doloribus consequuntur ratione, porro, quasi dolores veritatis facere? Iure illo quidem accusamus aliquid suscipit! Molestiae, cumque veniam? Magnam dolorum omnis saepe velit voluptates sed excepturi!</h4>
+                </div>
+                <div class="container" id="container1" style="display: flex; padding:1rem 1rem; height: max-content;">
+                    <i style="width: 25px; height: 33px; stroke: #3b3b3b; stroke-width:2; margin-left: -1rem;" data-feather="map-pin"></i>
+                    <h3 style="font-size: medium; font-weight: 500; background: #fff; padding:10px 10px; width:max-content; border-radius: 5px; margin-left: 5px;">lembang Bandung jawabarat majalengka cinangkiek</h3>
+                    <i style="width: 25px; height: 33px; stroke: #3b3b3b; stroke-width:2; margin-left: 2rem;" data-feather="dollar-sign"></i>
+                    <h3 style="font-size: medium; font-weight: 500; background: #fff; padding:10px 10px; width:max-content; border-radius: 5px; margin-left: 5px;">200.000</h3>
+                    <i style="width: 25px; height: 33px; stroke: #3b3b3b; stroke-width:2; margin-left: 2rem;" data-feather="calendar"></i>
+                    <h3 style="font-size: medium; font-weight: 500; background: #fff; padding:10px 10px; width:max-content; border-radius: 5px; margin-left: 5px;">11 January 2023</h3>
                 </div>
             </div>
-            <div class="search">
-                <div class="searchinput">
-                    <a href="#"><i data-feather="search"></i></a>
-                    <input type="text" placeholder="search">
+            </div>
+            <!-- option barr -->
+            <div class="col-md-2" style="height: 100vh; background-color: #fff; margin-top: 5rem; margin-left:74.4rem; position: fixed;">
+                <div class="container" style="display: flex;">
+                    <a href="#"><i style="width: 25px; height: 28px; stroke: #5e5e5e; stroke-width:2; position: absolute; margin-top: 16.5px; margin-left: -0.7rem;background: #7a797981; border-radius: 5px;" data-feather="search"></i></a>
+                    <input style="margin-top: 1rem; margin-left: 1rem;" type="search">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
