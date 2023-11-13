@@ -23,8 +23,9 @@ cloudinary.config({
     });
     const upload = multer({ storage: storage });
 
+router.get('/user/get/post/:id', post.getPost)    
 router.post('/user/post/:id_user', upload.single('file'), post.uploadPosting)
-router.put('/user/updateposting/:id_user/:id', upload.single('file'), post.updatePosting)
-router.delete('/user/deleteposting/:id_posting/:id_user', post.dletePosting)
+router.put('/user/updateposting/:id', upload.single('file'), post.updatePosting)
+router.delete('/user/deleteposting/:id_posting', post.dletePosting)
 
 module.exports = router

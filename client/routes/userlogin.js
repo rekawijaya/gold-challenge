@@ -13,20 +13,11 @@ router.use(session({
 router.get('/', async (req, res) => {
     let sess = req.session
     if(!sess.username){
-        return res.redirect('/')
+        return res.redirect('/login')
     }else{
-        var config = {
-            method: 'get',
-            url: process.env.PORT_API + '/user/get/',
-            headers: { }
-        };
-        var data = await axios(config).then(function (response) {
-            return response.data.data;
-        }).catch(function (error) {
-            return error
-        });
-        console.log("hasil read", data);
-        res.render('newindex', {base_url: process.env.BASE_URL, data: [], username: req.session.username})
+        let response = await axios({ method: 'get', url: process.env.PORT_API + '/user/get/'+ req.session.user_id, headers: { }}).then(response => response);
+        let posting  = await axios({ method: 'get', url: process.env.PORT_API + '/user/get/post/'+ req.session.user_id, headers: { }}).then(response => response);
+        res.render('newindex', {base_url: process.env.BASE_URL, data: response.data.data, posting: posting.data.data, user_id: req.session.user_id})
     }
 })
 router.get('/logoff', (req, res) => {
@@ -59,7 +50,9 @@ router.get('/submit_login', async (req, res) => {
         return {"status":"Failed","message":"login Gagal","data":[]}
     });
     if(hasil.status == "Success"){
-        req.session.username = req.query.username;
+        // console.log("hasil.data[0].id", hasil.data[0].id)
+        req.session.username    = hasil.data[0].username;
+        req.session.user_id     = hasil.data[0].id;
         res.setHeader("Content-Type", "application/json")
         res.writeHead(200);
         res.end(JSON.stringify({status: "success", display_message: "login success", data: ""}))
