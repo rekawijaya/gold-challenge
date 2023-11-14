@@ -118,12 +118,12 @@ let self = module.exports = {
 
     loginAuth: async function(req, res) {
         try {
-        const { username, password } = req.body;
-        const user = await query.select('user', {username: username, password: password});
+        const { username, password } = req.body
+        const user = await query.select('user', {username: username, password: password})
         if (user.length > 0) {
             if (user[0].password === password) {
-                req.session.userId = user.id;
-                res.redirect('/user/home/page');
+                req.session.userId = user.id
+                res.redirect('/user/home/page')
             }else{
                 console.log('erorr');
             }
