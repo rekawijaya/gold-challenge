@@ -10,6 +10,7 @@ const routers        = require('../client/routes/index')
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+app.use(express.static('public'))
 
 app.use(routers)
 app.listen(port, () => {

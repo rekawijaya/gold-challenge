@@ -42,6 +42,7 @@ let self = module.exports ={
         const file          = req.file
         const created_at    = new Date
         const updated_at    = new Date
+        console.log(id_posting);
         // const getUser       = await query.select('user', {id: id_user})
         const getIdPosting  = await query.select('posting', {id: id_posting})
         if (getIdPosting.length > 0) {
@@ -64,7 +65,6 @@ let self = module.exports ={
     dletePosting: async function (req, res){
         const id_posting   = req.params.id_posting
         const getPosting = await query.select('posting', {id: id_posting})
-
         if (getPosting.length > 0) {
             await query.delete('posting', {id: id_posting})
             respons.OK(res, {ststus:'success', message: 'berhasil menghapus posting', data: getPosting})

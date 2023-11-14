@@ -20,6 +20,12 @@ let self = module.exports = {
             throw error
         }
     },
+
+    selectAll: async function(table) {
+        const data =await knex.select('*').from(table)
+        return data
+    },
+    
     insert: async function insert(table, data) {
         try {
             const post = await knex(table).insert(data)

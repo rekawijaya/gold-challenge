@@ -11,6 +11,14 @@ const like = require('./routes/likeroutes')
 const follow = require('./routes/followroutes')
 const profile = require('./routes/profileroutes')
 const post    = require('./routes/postroutes')
+const session       = require('express-session')
+app.use(session({
+    secret: 'binar',
+    saveUninitialized: false,
+    resave: true,
+    cookie: {maxAge:7200000}
+}));
+app.use(express.static('public'))
 
 app.use(cors())
 app.use(express.json()) // for parsing application/json
