@@ -1,4 +1,4 @@
-const express        = require('express')
+const express       = require('express')
 const router        = express.Router()
 require('dotenv').config({path: ('../env/.env')})
 const axios         = require('axios')
@@ -10,6 +10,7 @@ router.use(session({
     resave: true,
     cookie: {maxAge:7200000}
 }));
+
 router.get('/', async (req, res) => {
     let sess = req.session
     if(!sess.username){
@@ -18,6 +19,8 @@ router.get('/', async (req, res) => {
         let response = await axios({ method: 'get', url: process.env.PORT_API + '/user/get/'+ req.session.user_id, headers: { }}).then(response => response);
         let posting  = await axios({ method: 'get', url: process.env.PORT_API + '/user/get/post/'+ req.session.user_id, headers: { }}).then(response => response);
         res.render('newindex', {base_url: process.env.BASE_URL, data: response.data.data, posting: posting.data.data, user_id: req.session.user_id})
+        console.log(response.data.data, "user");
+        console.log(posting.data.data, 'userpost');
     }
 })
 router.get('/logoff', (req, res) => {
@@ -29,7 +32,7 @@ router.get('/login', (req, res) => {
     if(!sess.username){
         res.render('newlogin', {base_url: process.env.BASE_URL, data: ""})
     }else{
-        return res.redirect('/user/login')
+        return res.redirect('/login')
     }
 })
 router.get('/submit_login', async (req, res) => {
@@ -37,7 +40,7 @@ router.get('/submit_login', async (req, res) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:3000/user/login',
+        url: process.env.PORT_API + '/user/login',
         headers: { 
         'Content-Type': 'application/json'
         },
@@ -49,8 +52,10 @@ router.get('/submit_login', async (req, res) => {
     }).catch((error) => {
         return {"status":"Failed","message":"login Gagal","data":[]}
     });
+
+    console.log(hasil, 'hasil');
     if(hasil.status == "Success"){
-        // console.log("hasil.data[0].id", hasil.data[0].id)
+        console.log("hasil.data", hasil.data)
         req.session.username    = hasil.data[0].username;
         req.session.user_id     = hasil.data[0].id;
         res.setHeader("Content-Type", "application/json")

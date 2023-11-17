@@ -1,11 +1,9 @@
 const express       = require('express')
 const router        = express.Router()
-const path          = require("path")
-const fs            = require("fs")
-require('dotenv').config({path: '../env/.env'})
-//var assets          = path.join(__dirname, 'assets')
+require('dotenv').config({path: ('../env/.env')})
 const axios         = require('axios')
 const session       = require('express-session')
+
 router.use(express.json())
 router.use(session({
     secret: 'binar',
@@ -14,19 +12,21 @@ router.use(session({
     cookie: {maxAge:7200000}
 }));
 
-router.get('/user', async (req, res) => {
+router.get('/', async (req, res) => {
     let sess = req.session 
     if(!sess.username){
-        return res.redirect('/user')
+        return res.redirect('/login')
     }else{
-        res.render('newindex', {base_url : process.env.BASE_URL, data: []})
+        let response = await axios({ method: 'get', url: process.env.PORT_API + '/user/get/'+ req.session.user_id, headers: { }}).then(response => response);
+        let posting  = await axios({ method: 'get', url: process.env.PORT_API + '/user/get/post/'+ req.session.user_id, headers: { }}).then(response => response);
+        res.render('newindex', {base_url: process.env.BASE_URL, data: response.data.data, posting: posting.data.data, user_id: req.session.user_id})
     }
 })
 
 router.get('/register', async (req, res) => {
     let sess = req.session 
     if(!sess.username){
-        res.render('newregister', {base_url : process.env.BASE_URL, data: []})
+        res.render('newregister', {base_url : process.env.BASE_URL, data: ""})
     }else{
         return res.redirect('/user')
     }
@@ -44,7 +44,7 @@ router.get('/submit_register', async (req, res) =>{
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:3000/user/register',
+        url: process.env.PORT_API + '/user/register',
         headers: { 
         'Content-Type': 'application/json'
         },
@@ -56,11 +56,12 @@ router.get('/submit_register', async (req, res) =>{
     }).catch((error) => {
         return {"status":"Failed","message":"registrasi gagal","data":[]}
     });
-    if(hasil.status == "success"){
-        req.session.username = req.query.username;
+    if(hasil.status == "Success"){
+         req.session.username    = hasil.data[0].username
+        req.session.user_id     = hasil.data[0].id
         res.setHeader("Content-Type", "application/json")
         res.writeHead(200);
-        res.end(JSON.stringify({status: "success", display_message: "registrasi success", data: ""}))
+        res.end(JSON.stringify({status: "Success", display_message: "registrasi Success", data: ""}))
     }else{
         res.setHeader("Content-Type", "application/json")
         res.writeHead(200);

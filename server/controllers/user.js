@@ -1,3 +1,4 @@
+const query = require("../model/query")
 
 let self = module.exports = {
     // login
@@ -24,6 +25,7 @@ let self = module.exports = {
         if (getUser.length > 0) {
             if (getUser[0].password === password) {
                 respons.OK(res, { status: 'Success', message: 'Login berhasil', data: getUser })
+                console.log(getUser);
             } else {
                 respons.NOTFOUND(res, { status: 'Failed', message: 'Password tidak sesuai', data: [] })
             }
@@ -38,7 +40,7 @@ let self = module.exports = {
     postregist: async function(req, res) {
         const { username, password, email, name, city, bday, gender } = req.body
         const currentDate = new Date()
-        
+    
         if (!username || !password || !email || !name || !city || !bday || !gender) {
             respons.ERROR(res, { status: 'Gagal', message: 'Ada field yang belum diisi', data: [] })
         } else if (username.length > 25 || password.length > 25 || name.length > 35) {
@@ -48,30 +50,43 @@ let self = module.exports = {
             if (getUser.length > 0) {
                 respons.ERROR(res, { status: 'Gagal', message: 'Username sudah terdaftar', data: [] })
             } else {
-                const insertData = {username, password, email, name, city, bday, gender, created_at: currentDate, updated_at: currentDate}
-                await query.insert('user', insertData)
-                respons.CREATED(res, { status: 'success', message: 'Pendaftaran berhasil', data: insertData })
+                const insertData = {
+                    username,
+                    password,
+                    email,
+                    name,
+                    city,
+                    bday,
+                    gender,
+                    created_at: currentDate,
+                    updated_at: currentDate
+                };
+    
+                const insertedData = await query.insertUser('user', insertData)
+                const userId = insertedData[0]
+                const getUserInsert = await query.select('user', userId)
+                
+                respons.CREATED(res, { status: 'Success', message: 'Pendaftaran berhasil', data: getUserInsert })
             }
         }
     },
     
+    
     //update username & password
     putupdate: async function(req, res) {
-        const { username, password, email, name, city, bday, gender } = req.body
+        const id    = req.params.id
+        const { username, email, name, city, bday, gender } = req.body
         const currentDate = new Date()
-    
-        if (!email) {
-            respons.NOTFOUND(res, { status: 'Failed', message: 'Email tidak ada', data: [] })
-        } else if (username.length >= 15 || password.length >= 8 || name.length >= 35) {
+        if (username.length >= 15 || name.length >= 35) {
             respons.ERROR(res, { status: 'Failed', message: 'Maksimum karakter username 15 dan password 8 dan nama 35', data: [] })
         } else {
-            const getUser = await query.select('user', { email })
+            const getUser = await query.select('user', { id: id })
     
             if (getUser.length > 0) {
-                const insertUser = {username, password, email, name, city, bday, gender, created_at: currentDate, updated_at: currentDate}
+                const insertUser = {id: id, username, email, name, city, bday, gender, created_at: currentDate, updated_at: currentDate}
     
-                await query.update('user', insertUser, { email })
-                respons.OK(res, { status: 'Success', message: 'Update berhasil', data: insertUser })
+                await query.update('user', insertUser, { id})
+                respons.OK(res, { status: 'success', message: 'Update berhasil', data: insertUser })
             } else {
                 respons.NOTFOUND(res, { status: 'Failed', message: 'Email tidak ditemukan', data: [] })
             }
@@ -80,14 +95,16 @@ let self = module.exports = {
     
     // delete user account
     delete: async function(req, res) {
+        const id    = req.params.id
         const { username, password } = req.body
-        const criteria = { username, password }
-    
+        const criteria = { id, username, password }
+        console.log(id);
+        console.log(req.body);
         const getUser = await query.select('user', criteria)
         
         if (getUser.length > 0) {
             await query.delete('user', criteria)
-            respons.OK(res, { status: 'Success', message: 'Akun telah dihapus', data: criteria })
+            respons.OK(res, { status: 'success', message: 'Akun telah dihapus', data: criteria })
         } else {
             respons.ERROR(res, { status: 'Failed', message: 'Data tidak ditemukan', data: [] })
         }
@@ -97,12 +114,12 @@ let self = module.exports = {
     
     // monolitic
     loginPage: async function(req, res){
-        let base_url = process.env.BASE_URL
+        let base_url = process.env.PORT_API
         res.render('login' , {base_url})
     },
 
     registerPage: async function(req, res){
-        let base_url = process.env.BASE_URL
+        let base_url = process.env.PORT_API
         res.render('regist' , {base_url})
     },
 
@@ -111,7 +128,7 @@ let self = module.exports = {
         let username    = req.session.username
         let data = await query.selectAll('user')
         let posting = await query.selectAll('posting')
-        let base_url = process.env.BASE_URL
+        let base_url = process.env.PORT_API
         res.render('index' , {base_url, data, posting, user_id, username})
     },
     

@@ -26,6 +26,15 @@ let self = module.exports = {
         return data
     },
     
+    insertUser: async function insert(table, data) {
+        try {
+            const post = await knex(table).insert(data).returning('id')
+            return post
+        } catch (error) {
+            console.error("Gagal menyisipkan data ke dalam tabel:", error);
+            throw error
+        }
+    },
     insert: async function insert(table, data) {
         try {
             const post = await knex(table).insert(data)

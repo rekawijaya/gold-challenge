@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>WANDERLY</title>
-    <!-- Bootstrap CSS -->
+    <script src="https://unpkg.com/feather-icons"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Custom Styles */
         body {
             background-image: url('/ishan-seefromthesky-WVziwa_DDwI-unsplash.jpg');
             background-size: cover;
@@ -26,9 +24,11 @@
         }
         .profile {
             background-color: rgba(52, 58, 64, 0.7);
-            color: #fff;
-            padding: 20px;
+            color: #000000;
+            padding: 25px;
             text-align: center;
+            font-weight: 700;
+            text-transform: capitalize;
         }
         .profile img {
             max-width: 150px;
@@ -48,7 +48,17 @@
             margin-right: 30px;
             margin-left: 30px;
             margin-top: 20px;
+            color: rgb(107, 69, 161)
+        }
 
+        .profile-info button {
+            margin-left: 2rem;
+            margin-top: 2rem;
+            background-color: rgb(107, 69, 161);
+        }
+
+        .modal-body button {
+            background-color: rgb(107, 69, 161);
         }
         .post-form {
             background-color: rgba(255, 255, 255, 0.8);
@@ -59,15 +69,24 @@
         }
         .post-cards {
             background-color: rgba(255, 255, 255, 0.8);
-            margin-top: 20px;
+            margin-top: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        /* Tambahkan gaya untuk warna teks pada formulir */
+
+        .contain-post {
+            margin-top: 1rem;
+        }
+
+        .modal-title,
+        .form-label,
+        .form-control {
+        color: black;
+    }        
         .post-form label,
         .post-form textarea,
         .post-form input {
-            color: #000000; /* Warna teks hitam */
+            color: #000000;
         }
     </style>
 </head>
@@ -75,28 +94,83 @@
 
 <!-- Header -->
 <div class="header">
-    <h1 class="display-4">WANDERELY</h1>
+    <h1 class="display-4">WANDERLY</h1>
 </div>
 
 <!-- Profile -->
 <div class="container-fluid profile mt-4">
     <div class="row">
         <div class="col-md-6 mx-auto text-center">
-            <img src="/client/public/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="Profile Picture" class="img-fluid">
+            <img src="/cesar-rincon-XHVpWcr5grQ-unsplash.jpg" alt="Profile Picture" class="img-fluid">
             <div class="mt-3 profile-info">
-                <i class='fas fa-user'></i> john_doe<br>
-                <i class='fas fa-user-alt'></i> John Doe<br>
-                <i class='fas fa-envelope'></i> john@example.com<br>
-                <i class='fas fa-map-marker-alt'></i> New York<br>
-                <i class='fas fa-birthday-cake'></i> 1990-05-15<br>
-                <i class='fas fa-venus-mars'></i> Male
+                <i class='fas fa-user'></i><%=data[0].username%><br>
+                <i class='fas fa-user-alt'></i><%=data[0].name%><br>
+                <i class='fas fa-envelope'></i><%=data[0].email%><br>
+                <i class='fas fa-map-marker-alt'></i><%=data[0].city%><br>
+                <i class='fas fa-birthday-cake'></i><%=data[0].bday%><br>
+                <i class='fas fa-venus-mars'></i><%=data[0].gender%><br>
+                <a href="/user/login/page"><i class='fas fa-sign-out-alt'></i></a>Logout<br>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Open Form
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pop-up form -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Header Pop-up -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Isi Form -->
+            <div class="modal-body">
+                <form>
+                    <!-- Input Form -->
+                    <div class="mb-3">
+                        <label for="exampleInputName" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">Name</label>
+                        <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">City</label>
+                        <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">Birthday</label>
+                        <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">Gender</label>
+                        <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                    </div>
+
+                    <!-- Tombol Submit -->
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Post Form -->
-<div class="container post-form mt-4">
+<div class="container post-form mt-4" id="form-post">
     <div class="row">
         <div class="col-md-8 mx-auto">
             <form>
@@ -106,7 +180,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="postImage" class="form-label">Upload Photo</label>
-                    <input type="file" class="form-control" id="postImage" name="postImage">
+                    <input type="file" class="form-control" id="file_posting" name="postImage">
                     <small class="form-text text-muted">Maximum file size: 5MB. Supported formats: JPG, PNG.</small>
                 </div>
                 <div class="mb-3">
@@ -115,14 +189,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="postBudget" class="form-label">Budget</label>
-                    <input type="text" class="form-control" id="postBudget" name="postBudget" placeholder="Enter budget">
+                    <input type="number" class="form-control" id="postBudget" name="postBudget" placeholder="Enter budget">
                 </div>
                 <div class="mb-3">
                     <label for="postDate" class="form-label">Date</label>
                     <input type="date" class="form-control" id="postDate" name="postDate">
                 </div>
-                <button type="submit" class="btn" style="background-color: rgb(107, 69, 161); color: #fff;">Post</button>
-                <button type="submit" class="btn" style="background-color: rgb(107, 69, 161); color: #fff;">Update</button>
+                <button type="button" class="btn" style="background-color: rgb(107, 69, 161); color: #fff;" onclick="myUpload()">Post</button>
+                <button type="button" class="btn" style="background-color: rgb(107, 69, 161); color: #fff;" onclick="myUpdate()">Update</button>
             </form>
         </div>
     </div>
@@ -131,34 +205,45 @@
 <!-- Post Cards -->
 <div class="container post-cards mt-4">
     <div class="row">
-        <!-- Sample card, you can dynamically generate cards based on posts -->
-        <div class="col-md-4">
+        <!-- <% if(posting.length > 0){ %> -->
+            <% for (var i = 0; i < posting.length;  i++ ) { %>
+        <div class="col-md-4 contain-post">
             <div class="card">
-                <img src="/photo-1682687220198-88e9bdea9931.avif" class="card-img-top" alt="Post Image">
+                <img src="<%=posting[i].file%>" class="card-img-top" alt="Post Image">
                 <div class="card-body">
-                    <h5 class="card-title">Post Title</h5>
-                    <p class="card-text">Description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="card-text"><%=posting[i].description%></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Location: New York, USA</li>
-                    <li class="list-group-item">Budget: $1000</li>
-                    <li class="list-group-item">Date: 2023-11-30</li>
+                    <li class="list-group-item"><%=posting[i].budget%></li>
+                    <li class="list-group-item"><%=posting[i].location%></li>
+                    <li class="list-group-item"><%=posting[i].date%></li>
                 </ul>
-                <div class="card-body">
-                    <!-- Icon Font Awesome -->
-                    <i class="fas fa-thumbs-up"></i> Like
-                    <span class="mx-2">|</span>
-                    <i class="fas fa-edit"></i> Edit
-                    <span class="mx-2">|</span>
-                    <i class="fas fa-trash-alt"></i> Delete
+                <div class="card-body react-button">
+                    <div class="btn-container">
+                        <input class="btn" style="position: absolute; margin-left: -1rem; opacity: 0;" type="button" id="id-like" value="<%=posting[i].id%>">
+                        <i class="icon edit-icon" data-feather="heart"></i>
+                        <input style="position: absolute; margin-left: -0.6rem; opacity: 0;" class="btn" type="button" id="id-update" value="<%=posting[i].id%>" onclick="toUpdate()">
+                        <i class="icon edit-icon" data-feather="edit"></i>
+                        <input style="position: absolute; margin-left: -0.5rem; opacity: 0;" class="btn" type="button" id="id-delete" value="<%=posting[i].id%>" onclick="deletePost()">
+                        <i class="icon trash-icon" data-feather="trash"></i>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Add more cards as needed -->
+        <% } %>
+        <!-- <% } %> -->
     </div>
 </div>
-
-<!-- Bootstrap JS and Popper.js (for Bootstrap's JavaScript plugins) -->
+<script>
+    feather.replace();
+</script>g
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function toUpdate(){
+                window.location.href = '#form-post'
+            }
+        </script>
+    </body>
+    </html>
