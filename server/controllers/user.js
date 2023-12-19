@@ -3,8 +3,9 @@ const query = require("../model/query")
 let self = module.exports = {
     // login
     getUser: async function (req, res){
-        const id = req.params.id
-        const getDataUser = await query.select('user', {id: id})
+        // const id = req.params.id
+        const username =req.body
+        const getDataUser = await query.select('user', {username:username})
         if(getDataUser.length === 0){
             respons.OK(res, {status: 'failed', message: 'data tidak ada'})
         }else {
